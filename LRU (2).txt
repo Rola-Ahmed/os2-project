@@ -1,0 +1,95 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication1;
+
+/**
+ *
+ * @author HP
+ */
+import java.io.IOException;
+
+public class LRU {
+    public void printLRU(int [] pages,int nums ,int fram) throws IOException {
+ 
+// Scanner inpuut = new Scanner(System.in);
+   int page=0,pgf=0;
+boolean flag=true;                                                                    //fram= size of array;
+ // int pages[]; 	  //pages array                                                                //nums =size of numbers array;
+int k=0;                                                                         //pgf=stands fortotal numbers of pages;
+                                                                                 //frame=array bet3 l frames;
+                                                                                 
+
+        int frame[]=new int[fram];
+	int a[]=new int[fram];
+	int b[]=new int[fram];
+        
+      
+	for(int i=0;i<fram;i++)
+		{
+		frame[i]=-1;
+		a[i]=-1;
+		b[i]=-1;
+		}
+        int pg=0;
+	for(pg=0;pg<nums;pg++)
+	{
+		page=pages[pg];
+		flag=true;
+		for(int j=0;j<fram;j++)
+			{
+			if(page==frame[j])
+			{flag=false; break;}
+			}
+	
+		for(int j=0; j<fram && flag; j++)
+			{
+			if(frame[j]==a[fram-1])
+			{k=j;
+			 break;}
+			}
+	
+		if(flag)
+		{
+		frame[k]=page;
+		System.out.print("FRAMES:\t");
+		for(int j=0;j<fram;j++)
+		System.out.print(frame[j]+"\t|\t");
+System.out.print("PAGE MISS"+ " "+"\n");
+		pgf++;
+		System.out.println();
+		}
+		else
+		{
+		System.out.print("FRAMES:\t");
+		for(int j=0;j<fram;j++)
+		System.out.print( frame[j] +"\t|\t");
+System.out.print("PAGE HIT"+" "+"\n");
+			System.out.println();
+		}
+                
+	int p=1;
+	b[0]=page;
+	for(int j=0;j<a.length;j++)
+	{
+		if(page!=a[j] && p<fram)
+		{
+		b[p]=a[j];
+		p++;
+		}
+	}
+	for(int j=0;j<fram;j++)
+	{
+	a[j]=b[j];
+	}
+	
+	}
+
+	System.out.println(" \"Total Page Fault:\""+" "+ pgf ); 
+
+
+
+
+}}
