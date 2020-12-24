@@ -1,0 +1,64 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package os;
+
+import java.io.IOException;
+/**
+ *
+ * @author LENOVO
+ */
+public class FIFO {
+/**
+ *
+ * @author HP
+     * @param pages
+ */
+        public void printFIFO(int [] pages,int nums ,int fram) throws IOException {
+            
+             int page=0,flag,pageTable=0,Total=0; //Total page refrence
+             int frame[]=new int[fram];
+
+            for(int i=0;i<fram;i++){ // Empty frames =
+            frame[i]= -1;
+            }
+
+            for(int i=0;i<nums;i++){
+              page=pages[i]; //current value
+                 flag=1;
+
+                 for(int j=0;j<fram;j++){
+               if(page==frame[j]){ //Repeated flag value = -1
+                 flag=-1;
+              break;
+               }
+                 }
+             if(flag==1){
+             frame[pageTable]=page;
+            pageTable++;
+
+               if(pageTable==fram){ 
+                 pageTable=0;
+               }
+
+               System.out.print("FRAMES:\t");
+          for(int j=0;j<fram;j++)
+               System.out.print(frame[j]+"\t|\t");
+               System.out.print("PAGE MISS"+ " "+"\n"); //fe page fault
+           Total++; // by7seb totalframeresult
+             }
+
+          else // if there's no page fault
+             {
+                     System.out.print("FRAMES:\t");
+                    for(int j=0;j<fram;j++)
+                          System.out.print( frame[j] +"\t|\t");
+               System.out.print("PAGE HIT"+" "+"\n"); //no page fault
+             }
+            }
+              System.out.println(" \"Total Page Fault:\""+" "+ Total ); //Number of frames = kaza
+
+        }
+}
